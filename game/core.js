@@ -18,6 +18,7 @@ var background; // прототип фона
 var isPlaying; // идет ли игра
 
 var scope; // количество сбитых самолетов империи
+var tmp_scope;
 
 // Для создания врагов
 var enemies = []; // враги
@@ -87,6 +88,7 @@ function init() // инициализация
 	player = new Player();
 	background = new Bg();
 	scope = 0;
+	tmp_scope = 0;
 
 	bg = document.getElementById("bg");
 	ctxBg = bg.getContext("2d");
@@ -142,19 +144,12 @@ function update()
 	for(var i = 0; i < bullets.length; i++) bullets[i].update();
 	for(var i = 0; i < kits.length; i++) kits[i].update();
 
-		if ((scope == 50 || scope == 100 || scope == 150 || scope == 200) && tmp_flag == false) 
-		{
-			enemySpeed++;
-			player.valueKD -= 10;
-			tmp_flag = true;
-		} 
-
-		if(scope == 51) tmp_flag = false;
-		if(scope == 101) tmp_flag = false;
-		if(scope == 151) tmp_flag = false;
-		if(scope == 201) tmp_flag = false;
-
-
+	if(scope - tmp_scope > 50)
+	{
+		enemySpeed++;
+		player.valueKD -= 10;
+		tmp_scope = scope;
+	}
 }
 
 function draw() // отрисовка
