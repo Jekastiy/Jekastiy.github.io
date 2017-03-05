@@ -24,11 +24,9 @@ function Player()
 	this.isRight = false;
 
 	this.isFire = false;
-	this.KD = 0;
-
-	this.valueKD = 40;
 
 	this.bullets = []; // пули игрока
+	this.reloading = new BulletReloading(40); // Перезарядка игрока
 }
 
 
@@ -116,7 +114,8 @@ Player.prototype.update = function()
 		}
 	}
 
-	this.KD--;
+	// kd --
+	this.reloading.reduce();
 }
 
 
@@ -136,11 +135,10 @@ Player.prototype.chooseDir = function()
 
 	if (this.isFire)
 	{
-		if(this.KD <= 0) 
+		if(this.reloading.isReady()) 
 			{ 
 				createBullet(player.drawX, player.drawY, 5, 5);
-				createBullet(player.drawX + player.width, player.drawY, 5, 5);
-				this.KD = this.valueKD;	
+				createBullet(player.drawX + player.width, player.drawY, 5, 5);	
 			}
 	}
 }
@@ -148,5 +146,33 @@ Player.prototype.chooseDir = function()
 Player.prototype.resetHealth = function()
 {
 	this.health = 10;
+}
+
+
+// класс кулдауна
+function BulletReloading(kd)
+{
+	var reload_value;
+	var tmp_reload_value;
+	var KD = kd;
+}
+
+BulletReloading.prototype.isReady = function()
+{
+	if(this.reload_value <= 0) {
+		this.reload_value = this.KD;
+		return true;
+	} else
+		return false;
+}
+
+BulletReloading.prototype.reduce = function()
+{
+	this.reload_value--;
+}
+
+BulletReloading.prototype.reduceKD = function()
+{
+	this.KD--;
 }
 
