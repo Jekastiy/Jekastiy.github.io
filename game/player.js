@@ -152,9 +152,9 @@ Player.prototype.resetHealth = function()
 // класс кулдауна
 function BulletReloading(kd)
 {
-	var reload_value;
-	var tmp_reload_value;
-	var KD = kd;
+	this.reload_value = kd;
+	this.tmp_reload_value = 0;
+	this.KD = kd;
 }
 
 BulletReloading.prototype.isReady = function()
