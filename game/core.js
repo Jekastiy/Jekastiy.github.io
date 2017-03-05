@@ -254,8 +254,7 @@ function spawnEnemy(count)
 
 function spawnKits()
 {
-	var kit = new gameObject(gameWidth / 2, 5);
-	kits.push(kit);
+	kits.push(new gameObject(getRandomInt(10, gameWidth - 10), 5));
 }
 
 function createBullet(X,Y, speed, damage)
@@ -282,7 +281,7 @@ function stopSpawnEnemies()
 	clearInterval(spawnInterval);
 }
 
-function ReduceKD()
+function getRandomInt(min, max)
 {
-	if(player.valueKD > 5) player.valueKD -= 5;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

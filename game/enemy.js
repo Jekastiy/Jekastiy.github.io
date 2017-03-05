@@ -55,7 +55,7 @@ Enemy.prototype.destroy = function()
 
 Enemy.prototype.fire = function()
 {
-	var bullet = new Bullet(this.drawX + this.width / 2 - 5, this.drawY + this.height - 25, this.speed  * 2, 1);
+	var bullet = new Bullet(this.drawX + this.width / 2 - 5, this.drawY + this.height - 25, this.speed * 2, 1);
 	bullet.vector = '+';
 	bullet.image.src = "game/res/bullet2.png";
 	bullets.push(bullet);
