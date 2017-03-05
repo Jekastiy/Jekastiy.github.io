@@ -147,7 +147,7 @@ function update()
 	if(scope - tmp_scope > 50)
 	{
 		enemySpeed++;
-		player.valueKD -= 10;
+		if(player.valueKD > 5) player.valueKD -= 5;
 		tmp_scope = scope;
 	}
 }
