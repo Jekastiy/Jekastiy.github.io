@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)file:///D:/Source/Jekastiy.github.io/menu.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>Menu</title>
+	
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<script type="text/javascript">
+		//var btns = document.getElementByClassName("menu_button");
+		
+		/*for (var i = 0; i < btns.length; i++) {
+				btns[i].onmouseenter = function(){
+				btn.style.border = "double";
+			}
+
+			btn_start.onmouseleave = function(){
+				btn.style.border = "none";
+			}
+		}*/
+
+		
+
+		function Navigate(url)
+		{
+			document.location.href = url;
+		}
+	</script>
+
+</head>
+<body>
+	<div align="center" id="d_menu" style="margin: auto; background-image: url('./menu_logo.png'); width: 800px; height: 600px; position: relative;">
+		sdf
+		<script type="text/javascript">
+			var menu_style = document.getElementById("d_menu").style;
+			menu_style.width = "800px";
+			menu_style.height = "600px";
+		</script>
+
+		<div class = "menu_button" style="top: 380px;" onclick="Navigate('file:///D:/Source/Jekastiy.github.io/index.html');">Start game</div>
+		<div class = "menu_button" style="top: 400px;" onclick="Navigate('file:///D:/Source/Jekastiy.github.io/index.html');">Upgrade   </div>
+		
+		<!--
+		<div id="div_upgrade" style="top: 300px;width: 250px;height: 60px;position: relative;background-color: #234;font-size: -webkit-xxx-large;color: cadetblue; cursor:pointer" onclick="document.location.href = 'file:///D:/Source/Jekastiy.github.io/index.html' ">Upgrade</div>
+		<script type="text/javascript">
+		//var btn_upgrade = getElementById("div_upgrade");
+		//btn_upgrade.style.FontSize = "14";
+		</script>-->
+	</div>
+
+	<!--div align="center" id="mcanvas">	
+	<!--<div id="gameName">Самолетик</div>-->
+	<!--
+	<div id="menu">
+		<input id="drawBtn" onclick="drawRect()" type="button" value="Draw">
+		<input id="clearBtn" type="button" value="Clear">
+	</div>
+	-->
+	<!--	<canvas id="bg"> HTML5 not available in this browser </canvas>
+		<canvas id="game"> HTML5 not available in this browser </canvas>
+		<a href = "" onclick="location.reload();"><canvas id="game_over"> HTML5 not available in this browser </canvas></a>
+		
+	</div> -->
+</body>
+</html>

@@ -3,18 +3,6 @@ body
 	margin-top: -25px;
 }
 
-.menu_button
-{
-	position: relative;
-	width: 250px;
-	height: 60px;
-	background-color: #234;
-	font-size: -webkit-xxx-large;
-	color: cadetblue;
-	cursor:pointer;
-	border-style: double; 
-}
-
 #mcanvas
 {
 	background-color: #555;
