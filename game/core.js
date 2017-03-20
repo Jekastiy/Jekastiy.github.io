@@ -20,6 +20,8 @@ var isPlaying; // идет ли игра
 var scope; // количество сбитых самолетов империи
 var tmp_scope;
 
+var bg_shift;
+
 // Для создания врагов
 var enemies = []; // враги
 var bullets = []; // bullets of enemis
@@ -65,7 +67,7 @@ var requestAnimFrame = window.requestAnimationFrame ||
 
 /*Картинки пока что глобально*/
 var imgStars = new Image();
-imgStars.src = "game/res/stars.png";
+imgStars.src = "game/res/Stars.png";
 
 var imgStars1 = new Image();
 imgStars.src = "game/res/stars.png";
@@ -89,6 +91,7 @@ function init() // инициализация
 	background = new Bg();
 	scope = 0;
 	tmp_scope = 0;
+	bg_shift = 600;
 
 	bg = document.getElementById("bg");
 	ctxBg = bg.getContext("2d");
@@ -150,13 +153,18 @@ function update()
 		enemySpeed++;				 // увеличить скорость противника
 		tmp_scope = scope;  		 // переменные для кд игрока
 	}
+
+	bg_shift-=2;
+	if(bg_shift == 0) bg_shift = 600;
 }
 
 function draw() // отрисовка
 {
 	clearCtx();
 
-	background.draw();
+	//background.draw();
+
+	ctxBg.drawImage(this.imgStars, 0, bg_shift, 600, 600, 0,0, gameWidth, gameHeight);
 	player.draw();
 	
 	for(var i = 0; i < enemies.length; i++) enemies[i].draw();
@@ -169,6 +177,8 @@ function draw() // отрисовка
 	ctxBg.fillText("Здоровье: " + player.health, 10, 30);
 	ctxBg.fillText("Счет: " + scope, 10, 50);
 	ctxBg.fillText("Враги: " + enemies.length, 10, 70);
+
+	
 }
 
 function clearCtx()
@@ -283,5 +293,5 @@ function stopSpawnEnemies()
 
 function getRandomInt(min, max)
 {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
