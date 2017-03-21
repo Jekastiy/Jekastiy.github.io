@@ -66,7 +66,7 @@ var requestAnimFrame = window.requestAnimationFrame ||
 
 /*Картинки пока что глобально*/
 var imgStars = new Image();
-imgStars.src = "game/res/stars.png";
+imgStars.src = "game/res/Stars.png";
 
 var imgStars1 = new Image();
 imgStars.src = "game/res/stars.png";
@@ -287,5 +287,5 @@ function stopSpawnEnemies()
 
 function getRandomInt(min, max)
 {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
