@@ -55,7 +55,9 @@ Player.prototype.update = function()
 				this.health--;
 				if (this.health <= 0) 
 					{
-						document.getElementById("game").style.display = "none";
+						document.location.href = "./game_over.html";
+
+						/*document.getElementById("game").style.display = "none";
 						document.getElementById("bg").style.display = "none";
 
 						game_over = document.getElementById("game_over");
@@ -66,7 +68,7 @@ Player.prototype.update = function()
 	
 						go_ctx.font = "bold 20px Arial";
 						go_ctx.fillStyle = "#F00";
-						go_ctx.fillText("Начать заново", 50, 150);
+						go_ctx.fillText("Начать заново", 50, 150);*/
 					}	
 			}
 	}
@@ -98,7 +100,7 @@ Player.prototype.update = function()
 
 			if (this.health <= 0) 
 					{
-						document.location.href = "././game_over.html";
+						document.location.href = "./game_over.html";
 
 						/*document.getElementById("game").style.display = "none";
 						document.getElementById("bg").style.display = "none";

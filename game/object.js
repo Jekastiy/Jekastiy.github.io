@@ -37,10 +37,18 @@ gameObject.prototype.update = function()
 		this.destroy();
 	}
 
-	if ((this.drawY + this.height > player.drawY) &&
-       ((this.drawX + this.width > player.drawX) || 
-	    (this.drawX < player.drawX + player.width)) && 
-       this.active)
+	if(
+		(this.drawX > player.drawX) && 
+		((this.drawX + this.width) < (player.drawX + player.width)) &&
+		(this.drawY > player.drawY) &&
+		((this.drawY + this.height) < (player.drawY + player.height)) &&
+		(this.active)
+	  )
+
+	//if ((this.drawY + this.height > player.drawY) &&
+    //   ((this.drawX + this.width > player.drawX) || 
+	//    (this.drawX < player.drawX + player.width)) && 
+    //   this.active)
 	{
 		player.health++;
 		this.active = false;
