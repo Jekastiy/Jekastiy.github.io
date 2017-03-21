@@ -19,6 +19,7 @@ var isPlaying; // идет ли игра
 
 var scope; // количество сбитых самолетов империи
 var tmp_scope;
+var bg_shift;
 
 // Для создания врагов
 var enemies = []; // враги
@@ -89,6 +90,7 @@ function init() // инициализация
 	background = new Bg();
 	scope = 0;
 	tmp_scope = 0;
+	bg_shift = 600;
 
 	bg = document.getElementById("bg");
 	ctxBg = bg.getContext("2d");
@@ -135,7 +137,9 @@ function stopLoop()
 
 function update() 
 { 
-	//console.log("loop"); 
+	//console.log("loop");
+	bg_shift--;
+	if(bg_shift == 0) bg_shift = 600;
 	player.update();
 	background.update();
 
@@ -155,8 +159,8 @@ function update()
 function draw() // отрисовка
 {
 	clearCtx();
-
-	background.draw();
+	ctxBg.drawImage(this.imgStars, 0, bg_shift, 600, 600, 0,0,800,600);
+	//background.draw();
 	player.draw();
 	
 	for(var i = 0; i < enemies.length; i++) enemies[i].draw();
