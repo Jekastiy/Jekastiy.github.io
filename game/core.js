@@ -66,7 +66,7 @@ var requestAnimFrame = window.requestAnimationFrame ||
 
 /*Картинки пока что глобально*/
 var imgStars = new Image();
-imgStars.src = "game/res/Stars.png";
+imgStars.src = "game/res/stars.png";
 
 var imgStars1 = new Image();
 imgStars.src = "game/res/stars.png";
