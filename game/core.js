@@ -118,9 +118,10 @@ function loop()
 	if (isPlaying)
 	{
 		update();
-		draw();
-		requestAnimFrame(loop);
+		draw();	
 	}
+
+	requestAnimFrame(loop);
 }
 
 function startLoop()
@@ -212,6 +213,12 @@ function checkKeyDown(e)
 		player.isFire = true;
 		e.preventDefault();
 	}
+	if(keyChar == ''){
+
+		if(isPlaying) Pause(); else Resume();
+		//isPlaying = !isPlaying;
+		e.preventDefault();
+	}
 }
 
 function checkKeyUp(e)
@@ -249,10 +256,13 @@ function checkKeyUp(e)
 /*Функция спауна врагов*/
 function spawnEnemy(count)
 {
-	while(count != 0)
+	if(isPlaying)
 	{
-		enemies.push(new Enemy(enemySpeed));
-		count--;
+		while(count != 0)
+		{
+			enemies.push(new Enemy(enemySpeed));
+			count--;
+		}
 	}
 }
 
@@ -288,4 +298,15 @@ function stopSpawnEnemies()
 function getRandomInt(min, max)
 {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function Pause(){
+	isPlaying = false;
+	document.getElementById('mcanvas').style['opacity'] = "0.5";
+	document.getElementById('mcanvas').style['background'] = "gray";
+}
+
+function Resume(){
+	isPlaying = true;
+	document.getElementById('mcanvas').style.opacity = "1";
 }
