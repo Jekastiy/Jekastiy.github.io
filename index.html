@@ -1,30 +1,77 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-		<title>Star Wars: Space Warrior</title>
-	
-		<link rel="stylesheet" type="text/css" href="./css/style.css">
-		<script type="text/javascript">
-			function Navigate(url)
-			{
-				document.location.href = url;
-			}
-		</script>
-	</head>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="DeadUser">
+  <link rel="icon" href="images/logo.png">
 
-	<body>
-		<div align="center" id="d_menu" style="margin: auto; background-image: url('menu_logo.png'); width: 800px; height: 600px; position: relative;">
-			<script type="text/javascript">
-				var menu_style = document.getElementById("d_menu").style;
-				menu_style.width = "800px";
-				menu_style.height = "600px";
-			</script>
+  <title>DeadUser</title>
 
-			<div class = "menu_button" style="top: 380px;" onclick="Navigate('https://jekastiy.github.io/game.html');">Start game</div>
-			<div class = "menu_button" style="top: 400px;" onclick="Navigate('https://jekastiy.github.io/upgrade.html');">Upgrade </div>
-			
-		</div>
-	</body>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.circlechart.js"></script>
+  <link href="css/deaduser.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Navbar</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Projects</a>
+      </div>
+      <ul id="navbar" class="nav navbar-nav navbar-collapse collapse">
+        <li><a href="gomoku.html">Gomoku</a></li>
+        <li><a href="https://jekastiy.github.io/">StarWars</a></li>           
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Download<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://drive.google.com/file/d/0B5t-e_LTi55jYmlvOU9VcW40czA/view?usp=sharing">Gomoku</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Source code<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://github.com/DeadUSer/Gomoku">Gomoku</a></li>
+            <li><a href="https://github.com/Jekastiy/Jekastiy.github.io">StarWars</a></li> 
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+</div>
+<div class="container theme-showcase" role="main" style="background-color: #eee;">
+  <div class="jumbotron" >
+    <h1 style="float:left; width: 70%">Current project: Tower Defence</h1>
+    <div style="float:left; width: 30%" class="demo" data-percent="5" ></div>
+    <script>
+      $('.demo').percentcircle();
+    </script>
+  </div>
+
+
+
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">egor.domozhirov@gmail.com</p>
+    <p class="text-muted">egeneavdeev2013@gmail.com</p>
+  </div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</body>
 </html>
