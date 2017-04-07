@@ -17,29 +17,32 @@ body
 
 #mcanvas
 {
-	background-color: #555;
-    position: relative;
+	position: static;
+	padding-top: 100px;
     width: 800px;
-    height: 600px;
+    height: 700px;
     margin: 0 auto;
 }
 
 #bg
 {
+	position: static;
 	display: block;
 	background:#000;
-	margin: 30px auto 0px;
+	margin: 0px;
+	border-top: 100px;
 	width: 800px;
-	height: 600;
+	height: 600px;
 }
 
 #game
 {
+	position: static;
 	display: block;
-	margin: -600px auto 0px;
+	margin: 0px;
+	margin-top: -600px;
 	width: 800px;
-	height: 600;
-
+	height: 600px;
 }
 
 

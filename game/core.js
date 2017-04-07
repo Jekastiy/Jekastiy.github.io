@@ -302,8 +302,8 @@ function getRandomInt(min, max)
 
 function Pause(){
 	isPlaying = false;
-	document.getElementById('mcanvas').style['opacity'] = "0.5";
-	document.getElementById('mcanvas').style['background'] = "gray";
+	document.getElementById('mcanvas').style['opacity'] = "0.8";
+	//document.getElementById('mcanvas').style['background'] = "gray";
 }
 
 function Resume(){
