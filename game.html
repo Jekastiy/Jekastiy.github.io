@@ -5,8 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
+
 	<title>Star Wars: Space Warrior</title>
-	
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -15,11 +15,21 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 
+	<script src="game/bg.js"></script>
+	<script src="game/player.js"></script>
+	<script src="game/enemy.js"></script>
+	<script src="game/core.js"></script>
+	<script src="game/bullet.js"></script>
+	<script src="game/object.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript">
-		function Navigate(url) { document.location.href = url; }
+		function Navigate(url)
+		{
+			document.location.href = url;
+		}
 	</script>
 </head>
-
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -52,26 +62,21 @@
 		</div>
 	</nav>
 
-	<div class="container theme-showcase" role="main" style="background-color: #eee;">
+	<div class="container theme-showcase" role="main">
 
-		<div align="center" id="d_menu" style="margin: auto; margin-top: 100px; background-image: url('menu_logo.png'); width: 800px; height: 600px; position: relative; ">
-			<script type="text/javascript">
-				var menu_style = document.getElementById("d_menu").style;
-				menu_style.width = "800px";
-				menu_style.height = "600px";
-			</script>
+		<div align="center" id="mcanvas">	
+			<canvas id="bg"> HTML5 not available in this browser </canvas>
+			<canvas id="game"> HTML5 not available in this browser </canvas>
 
-			<div class = "menu_button" style="top: 380px;" onclick="Navigate('game.html');">Start game</div>
-			<div class = "menu_button" style="top: 400px;" onclick="Navigate('upgrade.html');">Upgrade </div>
+			<a href = "" onclick="location.reload();"><canvas id="game_over"> HTML5 not available in this browser </canvas></a>
+
 		</div>
+		<footer class="footer">
+			<div class="container">
+				<p class="text-muted">egor.domozhirov@gmail.com &sect; egeneavdeev2013@gmail.com</p>
+			</div>
+		</footer>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	</div>
-
-	<footer class="footer">
-		<div class="container">
-			<p class="text-muted">egor.domozhirov@gmail.com &sect; egeneavdeev2013@gmail.com</p>
-		</div>
-	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</div>
 </body>
 </html>
