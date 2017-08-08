@@ -77,6 +77,7 @@ Player.prototype.update = function()
 	{	
 		if(this.isOverlapsed({ X: enemies[i].drawX, Y: enemies[i].drawY, W: enemies[i].width, H: enemies[i].height }))
 		{	
+			if(enemies[i].type == 3)
 			this.health--;
 			effects.push(getDamageEffect());
 
@@ -122,7 +123,7 @@ Player.prototype.update = function()
 			{
 				this.bullets[i].visible = false;
 				this.bullets[i].destroy();
-				enemies[j].destroy();
+				if(enemies[j].type != 3) enemies[j].destroy();
 				scope++;
 				break;
 			}

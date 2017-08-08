@@ -179,11 +179,11 @@ function update()
 		tmp_scope = scope;  		 // переменные для кд игрока
 	}
 
-	if(scope > 100 && creatingDeathStar == true){
+	/*if(scope > 100 && creatingDeathStar == true){
 		creatingDeathStar = false;
 		stopSpawnEnemies();
 		enemies.push(new Enemy(3, 0.4)); 
-	}
+	}*/
 }
 
 function draw() // отрисовка
