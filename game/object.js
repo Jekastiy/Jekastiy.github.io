@@ -32,33 +32,12 @@ gameObject.prototype.update = function()
 {
 	this.drawY += this.speed;
 
-	if(this.drawY > gameHeight)
-	{
-		this.destroy();
-	}
-
-	if(
-		(this.drawX > player.drawX) && 
-		((this.drawX + this.width) < (player.drawX + player.width)) &&
-		(this.drawY > player.drawY) &&
-		((this.drawY + this.height) < (player.drawY + player.height)) &&
-		(this.active)
-	  )
-
-	//if ((this.drawY + this.height > player.drawY) &&
-    //   ((this.drawX + this.width > player.drawX) || 
-	//    (this.drawX < player.drawX + player.width)) && 
-    //   this.active)
-	{
-		player.health++;
-		this.active = false;
-		this.destroy();
-	}
+	if(this.drawY > gameHeight) { this.active = false; this.destroy(); return; }
+	if(this.drawY > player.drawY + player.height) { this.active = false; return; }
+	if(!this.active) this.destroy();
 }
 
 gameObject.prototype.destroy = function()
 {
 	kits.splice(kits.indexOf(this), 1);
 }
-
-

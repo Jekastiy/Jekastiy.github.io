@@ -3,6 +3,11 @@ function Player()
 	this.img = new Image();
 	this.img.src = "game/res/player1.png";
 
+	this.imgs = [new Image(), new Image(), new Image()];
+	this.imgs[0].src = "game/res/player_-3.png";
+	this.imgs[1].src = "game/res/player_0.png";
+	this.imgs[2].src = "game/res/player_+3.png";
+
 	this.srcX = 0;
 	this.srcY = 0;
 
@@ -14,6 +19,9 @@ function Player()
 
 	this.drawX = (gameWidth / 2) - (this.width / 2);
 	this.drawY = gameHeight - this.height;	
+
+	this.axisX = this.drawX * (this.width * 0.5);
+	this.axisY = this.drawY * (this.height * 0.5);
 
 	this.speed = 5;
 	this.health = 10;
@@ -27,20 +35,44 @@ function Player()
 
 	this.bullets = []; // пули игрока
 	this.reloading = new BulletReloading(40); // Перезарядка игрока
+
+	this.acceleration = 0; // боковое ускорение
 }
 
 
 Player.prototype.draw = function()
 {
+	if(this.acceleration <= -0.5) this.img = this.imgs[0]; else
+	if((this.acceleration > - 0.5) && (this.acceleration < 0.5)) this.img = this.imgs[1]; else
+	if(this.acceleration >= 0.5) this.img = this.imgs[2];
+
 	ctxGame.drawImage(this.img, 
 		this.srcX, this.srcY, this.srcWidth, this.srcHeight,
 		this.drawX,this.drawY, this.width, this.height
 		);
+	//ctxGame.fillStyle = "green";
+	//ctxGame.fillRect(this.drawX, this.drawY, this.width, this.height);
+	//drawCenter(this.axisX, this.axisY, this.width, this.height);
 }
 
 Player.prototype.update = function()
 {
 	this.chooseDir();
+
+	/*
+	for(var i = 0; i < kits.length; i++) {
+		if((this.drawX < kits[i].drawX + kits[i].width) || 
+			(this.drawX + this.width > kits[i].drawX) || 
+			(this.drawY < kits[i].drawY + kits[i].height) || 
+			(this.drawY + this.height > kits[i].drawY)) 
+		{
+			this.health++;
+			draw_effect1 = true;
+			draw_effect1_time = 25;
+			kits[i].active = false;
+		}
+	}
+	*/
 
 	for(var i = 0; i < enemies.length; i++)
 	{
@@ -50,26 +82,20 @@ Player.prototype.update = function()
 			this.drawY - 5 + this.height > enemies[i].drawY  -5 && // по горизонтали наезжаем
 			this.drawY - 5 < enemies[i].drawY + enemies[i].height -5) 
 			{
-				enemies[i].destroy();
-
-				this.health--;
-				if (this.health <= 0) 
-					{
+				if(enemies[i].type == 3) {	
+					var to_x = ((this.drawX < (enemies[i].drawX + enemies[i].width * 0.75)) || (this.drawX + this.width > (enemies[i].drawX + enemies[i].width * 0.25)));
+					var to_y = (this.drawY < enemies[i].drawY + enemies[i].height * 0.75);
+					if(to_x && to_y) { 
+						this.health--;
+						if (this.health <= 0) document.location.href = "./game_over.html";
+					}
+				} else { 
+					enemies[i].destroy();
+					this.health--;
+					if (this.health <= 0) {
 						document.location.href = "./game_over.html";
-
-						/*document.getElementById("game").style.display = "none";
-						document.getElementById("bg").style.display = "none";
-
-						game_over = document.getElementById("game_over");
-						go_ctx = game_over.getContext("2d");
-	
-						go_ctx.width = gameWidth;
-						go_ctx.height = gameHeight;
-	
-						go_ctx.font = "bold 20px Arial";
-						go_ctx.fillStyle = "#F00";
-						go_ctx.fillText("Начать заново", 50, 150);*/
-					}	
+					}
+				}
 			}
 	}
 
@@ -97,39 +123,37 @@ Player.prototype.update = function()
 		{
 			bullets.splice(bullets.indexOf(bullets[i]), 1);
 			this.health--;
+			effects.push(getDamageEffect());
 
 			if (this.health <= 0) 
 					{
 						document.location.href = "./game_over.html";
-
-						/*document.getElementById("game").style.display = "none";
-						document.getElementById("bg").style.display = "none";
-
-						game_over = document.getElementById("game_over");
-						go_ctx = game_over.getContext("2d");
-	
-						go_ctx.width = gameWidth;
-						go_ctx.height = gameHeight;
-	
-						go_ctx.font = "bold 20px Arial";
-						go_ctx.fillStyle = "#F00";
-						go_ctx.fillText("Начать заново", 50, 150);*/
 					}	
 		}
 	}
 
 	// kd --
 	this.reloading.reduce();
+
+	if(this.acceleration < 0) 
+		this.acceleration += 0.1; 
+	else
+	if(this.acceleration > 0) 
+		this.acceleration -= 0.1; 
 }
 
 
 Player.prototype.chooseDir = function()
 {
-	if (this.isLeft && (this.drawX > 0)) 	
+	if (this.isLeft && (this.drawX > 0)) {	
 		this.drawX -= this.speed;
+		if(this.acceleration > -1) this.acceleration -= 0.2; 
+	}
 
-	if (this.isRight && (this.drawX < gameWidth-this.width))
+	if (this.isRight && (this.drawX < gameWidth-this.width)) {
 		this.drawX += this.speed;
+		if(this.acceleration < 1) this.acceleration += 0.2; 
+	}
 	
 	if (this.isUp && (this.drawY > 0)) 		
 		this.drawY -= this.speed;
@@ -141,10 +165,12 @@ Player.prototype.chooseDir = function()
 	{
 		if(this.reloading.isReady()) 
 			{ 
-				createBullet(player.drawX, player.drawY, 5, 5);
-				createBullet(player.drawX + player.width, player.drawY, 5, 5);	
+				createBullet(player.drawX, player.drawY + 15, 5, 5);
+				createBullet(player.drawX + player.width - 10, player.drawY + 15, 5, 5);	
 			}
 	}
+
+	this.axisX = this.drawX + (this.width * 0.5);
 }
 
 Player.prototype.resetHealth = function()

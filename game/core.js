@@ -1,5 +1,9 @@
 /*События*/
 window.onload = init;
+window.onblur = function() {
+	Pause();
+}
+
 
 /*Глобальные переменные*/
 var gameWidth = 800; // размеры поля
@@ -34,6 +38,10 @@ var spawnAmount = 1;
 var kitSpawnInterval;
 
 var tmp_flag = false;
+
+var creatingDeathStar = true;
+
+var effects = [];
 /// для мыши	
 {
 	var mouseX;
@@ -63,10 +71,19 @@ var requestAnimFrame = window.requestAnimationFrame ||
 					   window.oRequestAnimationFrame ||
 					   window.msRequestAnimationFrame;
 
+var draw_effect1 = false;
+var draw_effect1_time = 10;
+
 
 /*Картинки пока что глобально*/
 var imgStars = new Image();
 imgStars.src = "game/res/stars.png";
+
+var effect1 = new Image();
+effect1.src = "game/res/effect1.png";
+
+var effect2 = new Image();
+effect2.src = "game/res/effect2.png";
 
 var imgStars1 = new Image();
 imgStars.src = "game/res/stars.png";
@@ -76,6 +93,12 @@ imgPlayer.src = "game/res/player1.png";
 
 var imgEnemy = new Image();
 imgEnemy.src = "game/res/enemy1.png";
+
+var imgEnemy2 = new Image();
+imgEnemy2.src = "game/res/enemy2.png";
+
+var imgDeathStar = new Image();
+imgDeathStar.src = "game/res/DeathStar.png"; 
 
 var imgBullet = new Image();
 imgBullet.src = "game/res/bullet1.png";
@@ -155,12 +178,34 @@ function update()
 		enemySpeed++;				 // увеличить скорость противника
 		tmp_scope = scope;  		 // переменные для кд игрока
 	}
+
+	if(scope > 100 && creatingDeathStar == true){
+		creatingDeathStar = false;
+		stopSpawnEnemies();
+		enemies.push(new Enemy(3, 0.4)); 
+	}
 }
 
 function draw() // отрисовка
 {
 	clearCtx();
 	ctxBg.drawImage(this.imgStars, 0, bg_shift, 600, 600, 0,0,800,600);
+	
+	for (var i = 0; i < effects.length; i++) {
+		var damage_effect = effects[i]; //getDamageEffect();
+		if(damage_effect.effect_status) { 
+			damage_effect.effect_time--; 
+			ctxBg.drawImage(this.effect2, 0, 0, 800, 600, 0, 0, 800, 600); 
+			if(damage_effect.effect_time == 0) {
+				damage_effect.effect_status = false; 
+			}
+		} else { 
+			effects.splice(i, 1);
+			continue; 
+		}
+	}
+
+	if(draw_effect1) { draw_effect1_time--; ctxBg.drawImage(this.effect1, 0, 0, 800, 600, 0,0,800,600); if(draw_effect1_time == 0) draw_effect1 = false; }
 	//background.draw();
 	player.draw();
 	
@@ -174,6 +219,7 @@ function draw() // отрисовка
 	ctxBg.fillText("Здоровье: " + player.health, 10, 30);
 	ctxBg.fillText("Счет: " + scope, 10, 50);
 	ctxBg.fillText("Враги: " + enemies.length, 10, 70);
+	if(enemies.length != 0) ctxBg.fillText("Скорость врагов: " + enemies[0].speed, 10, 90);
 }
 
 function clearCtx()
@@ -216,7 +262,6 @@ function checkKeyDown(e)
 	if(keyChar == ''){
 
 		if(isPlaying) Pause(); else Resume();
-		//isPlaying = !isPlaying;
 		e.preventDefault();
 	}
 }
@@ -260,7 +305,12 @@ function spawnEnemy(count)
 	{
 		while(count != 0)
 		{
-			enemies.push(new Enemy(enemySpeed));
+			if(scope < 50) {
+				enemies.push(new Enemy(1, enemySpeed)); 
+			}
+			else {
+				enemies.push(new Enemy(2, enemySpeed));
+			}
 			count--;
 		}
 	}
@@ -268,7 +318,10 @@ function spawnEnemy(count)
 
 function spawnKits()
 {
-	kits.push(new gameObject(getRandomInt(10, gameWidth - 10), 5));
+	player.health++;
+	draw_effect1 = true;
+	draw_effect1_time = 25;
+	//kits.push(new gameObject(getRandomInt(10, gameWidth - 10), 5));
 }
 
 function createBullet(X,Y, speed, damage)
@@ -280,6 +333,7 @@ function createBullet(X,Y, speed, damage)
 /*Интервал спауна врагов*/
 function startSpawnEnemies()
 {
+	//return;
 	// stopSpawnEnemies();
 	spawnInterval = setInterval(
 		function() { spawnEnemy(spawnAmount) }
@@ -287,7 +341,7 @@ function startSpawnEnemies()
 		);
 	kitSpawnInterval = setInterval(
 		function() { spawnKits() }, 
-		10000);
+		15000);
 }
 
 function stopSpawnEnemies()
@@ -300,13 +354,20 @@ function getRandomInt(min, max)
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Pause(){
+function Pause() {
 	isPlaying = false;
 	document.getElementById('mcanvas').style['opacity'] = "0.8";
-	//document.getElementById('mcanvas').style['background'] = "gray";
 }
 
-function Resume(){
+function Resume() {
 	isPlaying = true;
 	document.getElementById('mcanvas').style.opacity = "1";
+}
+
+function getDamageEffect() {
+	var retval = {
+		effect_time: 25,
+		effect_status: true,
+	}
+	return retval;
 }
