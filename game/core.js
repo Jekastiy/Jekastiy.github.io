@@ -172,9 +172,9 @@ function update()
 	for(var i = 0; i < bullets.length; i++) bullets[i].update();
 	for(var i = 0; i < kits.length; i++) kits[i].update();
 
-	if(scope - tmp_scope > 50) // проверка на КД пули
+	if(scope - tmp_scope > 20) // проверка на КД пули
 	{
-		player.reloading.reduceKD(); // если нужно, уменьшить КД для игрока
+		player.gun.reduceKD();       // если нужно, уменьшить КД для игрока
 		enemySpeed++;				 // увеличить скорость противника
 		tmp_scope = scope;  		 // переменные для кд игрока
 	}
@@ -335,10 +335,7 @@ function startSpawnEnemies()
 {
 	//return;
 	// stopSpawnEnemies();
-	spawnInterval = setInterval(
-		function() { spawnEnemy(spawnAmount) }
-		,spawnTime
-		);
+	spawnInterval = setInterval(function() { spawnEnemy(spawnAmount) }, spawnTime);
 	kitSpawnInterval = setInterval(
 		function() { spawnKits() }, 
 		15000);

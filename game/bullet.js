@@ -21,6 +21,7 @@ function Bullet(X,Y, SpeedBullet, Damage)
 	this.speed = SpeedBullet;		// скорость пули
 	this.damage = 1; 	// урон, причиняемый снарядом
 	this.vector = '-';	// направление движения
+	this.visible = true;
 }
 
 Bullet.prototype.init = function(Source) 
@@ -30,7 +31,8 @@ Bullet.prototype.init = function(Source)
 
 Bullet.prototype.draw = function()
 {
-	ctxGame.drawImage(this.image, 
+	if(this.visible)
+		ctxGame.drawImage(this.image, 
 		this.srcX, this.srcY, this.srcWidth, this.srcHeight,
 		this.drawX,this.drawY, this.width, this.height
 		);

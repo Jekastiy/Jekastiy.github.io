@@ -118,7 +118,7 @@ Enemy.prototype.destroy = function()
 
 Enemy.prototype.fire = function()
 {
-	var bullet = new Bullet(this.drawX + this.width / 2 - 5, this.drawY + this.height - 25, this.bulletSpeed, 1);
+	var bullet = new Bullet(this.drawX + this.width / 2 - 5, this.drawY + this.height - 25, this.bulletSpeed, this.type);
 	bullet.vector = '+';
 	bullet.image.src = "game/res/bullet2.png";
 	bullets.push(bullet);
