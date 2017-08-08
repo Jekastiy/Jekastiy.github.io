@@ -18,7 +18,7 @@ function Bullet(X,Y, SpeedBullet, Damage)
 	this.drawX = X; 
 	this.drawY = Y; 
 	
-	this.speed = 5;		// скорость пули
+	this.speed = SpeedBullet;		// скорость пули
 	this.damage = 1; 	// урон, причиняемый снарядом
 	this.vector = '-';	// направление движения
 }
