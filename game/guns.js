@@ -27,7 +27,7 @@ var static_GUNS = [
 			this.reload_value--;
 		},
 		reduceKD(){
-			this.KD -= 10;
+			if(this.KD > 15) this.KD -= 10;
 		}
 	}, {
 		type: 2, 	// спаренное оружие, стреляет поочередно с разных крыльев
@@ -52,7 +52,7 @@ var static_GUNS = [
 			this.reload_value--;
 		},
 		reduceKD(){
-			this.KD -= 5;
+			if(this.KD > 15) this.KD -= 10;
 		}
 	}, {
 		type: 3, 	// ракетница
