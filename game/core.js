@@ -58,8 +58,6 @@ var effects = [];
 	{
 		//player.drawX = e.pageX - 200;//- player.width/2;
 		//player.drawY = e.pageY - game.offsetTop;//- player.height/2;
-
-
 	}
 
 }
@@ -172,11 +170,21 @@ function update()
 	for(var i = 0; i < bullets.length; i++) bullets[i].update();
 	for(var i = 0; i < kits.length; i++) kits[i].update();
 
-	if(scope - tmp_scope > 20) // проверка на КД пули
+	if(scope - tmp_scope > 30) // проверка на КД пули
 	{
 		player.gun.reduceKD();       // если нужно, уменьшить КД для игрока
 		enemySpeed++;				 // увеличить скорость противника
 		tmp_scope = scope;  		 // переменные для кд игрока
+	}
+
+	if(scope == 100) {
+		scope++;
+		let tmp_speed = player.gun.speed;
+		let tmp_lvl = player.gun.level;
+		player.gun = new DoubleLaser();
+		player.gun.speed = tmp_speed;
+		player.gun.level = tmp_lvl;
+		player.gun.init();
 	}
 
 	/*if(scope > 100 && creatingDeathStar == true){

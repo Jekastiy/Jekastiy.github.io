@@ -28,7 +28,7 @@ function Player()
 	this.health = 10;
 
 	// Gun
-	this.gun = getGun(1); // взять на вооружение одноствольный лазер
+	this.gun = new MonoLaser(); // взять на вооружение одноствольный лазер
 
 	this.isUp = false;
 	this.isDown = false;

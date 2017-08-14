@@ -66,39 +66,87 @@ var static_GUNS = [
 ];
 
 class Gun {
-			constructor(id, kd, damage) {
-			  this.id = id;
-		      this.damage = damage;
-		      this.KD = kd;
-		      this.reload_value = 0;
-		      this.level = 0;
-		   	}
+	constructor(id, kd, damage) {
+	  this.id = id;
+	  this.damage = damage;
+	  this.KD = kd;
+	  this.reload_value = 0;
+	  this.level = 0;
+	  this.speed = 5;
+	}
 
-		   	fire() {
-		   		return "You damage enemy: " + this.damage + "p from gun №" + this.id;
-		   	}
+	fire() {
+		return "You damage enemy: " + this.damage + "p from gun №" + this.id;
+	}
 
-		   	isReady() {
-				if(this.reload_value <= 0) {
-					this.reload_value = this.KD;
-					return true;
-				} else
-					return false;
-			}
+	isReady() {
+		if(this.reload_value <= 0) {
+			this.reload_value = this.KD;
+			return true;
+		} else
+			return false;
+	}
 
-			reduce() {
-				this.reload_value--;
-			}
+	reduce() {
+		this.reload_value--;
+	}
 
-			reduceKD() {
-				this.levelUp();
-			}
+	reduceKD() {
+		this.levelUp();
+	}
 
-			levelUp() {
-				if(this.level < 5) {
-					this.level++;
-					let tmp = [50,40,35,25,20,15];
-					this.KD = tmp[this.level];
-				}
-			}
+	levelUp() {
+		if(this.level < 5) {
+			this.level++;
+			this.damage += 1;
+			this.speed += 0.5;
+			let tmp = [50, 40, 35, 25, 20, 15];
+			this.KD = tmp[this.level];
 		}
+	}
+}
+
+class MonoLaser extends Gun {
+	constructor() {
+		super(0, 50, 1);
+	}
+
+	fire() {
+		createBullet(player.drawX + (player.width * 0.5), player.drawY + 15, this.speed, 5);
+	}
+}
+
+class DoubleLaser extends Gun {
+	constructor(){
+		super(1, 40, 1);
+		this.side = true;
+	}
+
+	init() {
+		let tmp = [40, 30, 25, 20, 15, 10];
+		this.KD = tmp[this.level];
+	}
+
+	fire() {
+		if(this.side) {
+			createBullet(player.drawX, player.drawY, this.speed, 5);
+		} else {
+			createBullet(player.drawX + player.width - 5, player.drawY, this.speed, 5);
+		}
+		this.swapSide();
+	}
+
+	levelUp() {
+		if(this.level < 5) {
+			this.level++;
+			this.damage += 1;
+			this.speed += 0.5;
+			let tmp = [40, 30, 25, 20, 15, 10];
+			this.KD = tmp[this.level];
+		}
+	}
+
+	swapSide() {
+		this.side = !this.side;
+	}
+}
