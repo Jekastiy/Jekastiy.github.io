@@ -81,7 +81,8 @@ Player.prototype.update = function()
 			this.health--;
 			effects.push(getDamageEffect());
 
-			if (this.health <= 0) {
+			if (this.health <= 0) { 
+				Pause();
 				document.location.href = "./game_over.html";
 			} 
 		}
@@ -98,7 +99,7 @@ Player.prototype.update = function()
 				bullets.splice(bullets.indexOf(bullets[i]), 1);
 				effects.push(getDamageEffect());
 
-				if (this.health <= 0) document.location.href = "./game_over.html";
+				if (this.health <= 0) { Pause(); document.location.href = "./game_over.html"; }
 			}
 	}
 

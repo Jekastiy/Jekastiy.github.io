@@ -68,11 +68,14 @@ Bullet.prototype.destroy = function()
 
 var laserBullets = [];
 
+var imgRocket = new Image();
+imgRocket.src = "game/res/rocket.png";
+
 // Класс одиночного лазера
 class LaserBullet {
 			constructor(loc, damage, speed) {
 				this.damage = damage;
-				this.SIZE = { W: 8, H: 15}
+				this.SIZE = { W: 20, H: 26}
 				this.LOCATION = loc;
 				this.speed = speed;
 				this.active = true;
@@ -101,8 +104,8 @@ class LaserBullet {
 				}
 
 				if(bullet.visible) {
-					ctxGame.drawImage(imgBullet, 
-						0, 0, 8, 15,
+					ctxGame.drawImage(imgRocket, 
+						0, 0, 60, 120,
 						bullet.LOCATION.X, bullet.LOCATION.Y, bullet.SIZE.W, bullet.SIZE.H
 					);
 					//ctx.drawImage(new Image(), 0, 0, 20, 20, 0, 0, 20, 20);
@@ -112,6 +115,27 @@ class LaserBullet {
 			update() {
 				if(this.active) {
 					this.LOCATION.Y -= this.speed;
+
+				}
+
+				if(enemies.length != 0) {
+					let abs = enemies[0].drawX + enemies[0].width * 0.5;
+				
+					if( abs > this.LOCATION.X) this.LOCATION.X += 2; else this.LOCATION.X -= 2; 
+				}
+
+				for (var j = 0; j < enemies.length; j++) 
+				{
+					if(this.LOCATION.Y < enemies[j].drawY && 
+					   this.LOCATION.X > enemies[j].drawX - 5 &&  
+					   this.LOCATION.X < enemies[j].drawX + enemies[j].width - 5)
+					{
+						this.active = false;
+						this.destroy();
+						enemies[j].destroy();
+						scope++;
+						break;
+					}
 				}
 			}
 
@@ -121,7 +145,7 @@ class LaserBullet {
 				return true;
 			}
 
-			fire() {
+			destroy() {
 				this.active = false;
 				this.visible = false;
 				this.speed = 0;
