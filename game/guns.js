@@ -113,6 +113,7 @@ class MonoLaser extends Gun {
 
 	fire() {
 		createBullet(player.drawX + (player.width * 0.5), player.drawY + 15, this.speed, 5);
+		//laserBullets.push(new LaserBullet({X: player.drawX + (player.width * 0.5) - 5, Y: player.drawY + 15}, 2, this.speed));
 	}
 }
 

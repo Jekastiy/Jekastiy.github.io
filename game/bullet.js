@@ -22,6 +22,7 @@ function Bullet(X,Y, SpeedBullet, Damage)
 	this.damage = 1; 	// урон, причиняемый снарядом
 	this.vector = '-';	// направление движения
 	this.visible = true;
+	this.active = true;
 }
 
 Bullet.prototype.init = function(Source) 
@@ -54,12 +55,77 @@ Bullet.prototype.update = function()
 
 Bullet.prototype.destroy = function()
 {
+	this.active = false;
 	if(this.vector == '+') // пуля противника
 	{
-		enemy.bullets.splice(enemy.bullets.indexOf(this), 1);
+		enemy.bullets = enemy.bullets.filter((number) => {return (number.active)? true: false});
 	}
 	else // пуля героя
 	{
-		player.bullets.splice(player.bullets.indexOf(this), 1);
+		player.bullets = player.bullets.filter((number) => {return (number.active)? true: false});
 	}
+}
+
+var laserBullets = [];
+
+// Класс одиночного лазера
+class LaserBullet {
+			constructor(loc, damage, speed) {
+				this.damage = damage;
+				this.SIZE = { W: 8, H: 15}
+				this.LOCATION = loc;
+				this.speed = speed;
+				this.active = true;
+				this.visible = true;
+			}
+
+			draw() {
+				if(ctx == null) { 
+					console.log(`Error: Bullet.Draw() \n${bullet}\n${ctx}`); 
+					return; 
+				}
+
+				if(this.visible) {
+					ctxGame.drawImage(imgBullet, 
+						0, 0, 8, 15,
+						this.LOCATION.X, this.LOCATION.Y, this.SIZE.W, this.SIZE.H
+					);
+					//ctx.drawImage(new Image(), 0, 0, 20, 20, 0, 0, 20, 20);
+				}
+			}
+
+			static draw(bullet = null, ctx = null) {
+				if(bullet == null || ctx == null) { 
+					console.log(`Error: Bullet.Draw() \n${bullet}\n${ctx}`); 
+					return; 
+				}
+
+				if(bullet.visible) {
+					ctxGame.drawImage(imgBullet, 
+						0, 0, 8, 15,
+						bullet.LOCATION.X, bullet.LOCATION.Y, bullet.SIZE.W, bullet.SIZE.H
+					);
+					//ctx.drawImage(new Image(), 0, 0, 20, 20, 0, 0, 20, 20);
+				}	
+			}
+
+			update() {
+				if(this.active) {
+					this.LOCATION.Y -= this.speed;
+				}
+			}
+
+			static isOverlaped(size, loc) {
+				if(this.LOCATION.Y < loc.Y || this.LOCATION.Y > loc.Y + size.H) return false;  
+				if(this.LOCATION.X < loc.X || this.LOCATION.X > loc.X + size.W) return false;
+				return true;
+			}
+
+			fire() {
+				this.active = false;
+				this.visible = false;
+				this.speed = 0;
+				this.LOCATION = {X: -1, Y: -1};
+				this.damage = 0;
+			}
 }

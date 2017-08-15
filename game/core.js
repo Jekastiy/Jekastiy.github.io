@@ -169,6 +169,7 @@ function update()
 	for(var i = 0; i < player.bullets.length; i++) player.bullets[i].update();
 	for(var i = 0; i < bullets.length; i++) bullets[i].update();
 	for(var i = 0; i < kits.length; i++) kits[i].update();
+	laserBullets.forEach((item) => { item.update(); });
 
 	if(scope - tmp_scope > 30) // проверка на КД пули
 	{
@@ -221,6 +222,7 @@ function draw() // отрисовка
 	for(var i = 0; i < player.bullets.length; i++) player.bullets[i].draw();
     for(var i = 0; i < bullets.length; i++) bullets[i].draw();
     for(var i = 0; i < kits.length; i++) kits[i].draw();
+    laserBullets.forEach((item) => { LaserBullet.draw(item, ctxGame); });
 
     ctxBg.font = "bold 20px Arial";
 	ctxBg.fillStyle = "#F00";
