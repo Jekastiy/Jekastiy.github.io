@@ -56,6 +56,7 @@ var effects = [];
 
 	function mouseClick(e)
 	{
+		console.log(e);
 		//player.drawX = e.pageX - 200;//- player.width/2;
 		//player.drawY = e.pageY - game.offsetTop;//- player.height/2;
 	}
@@ -103,6 +104,17 @@ imgBullet.src = "game/res/bullet1.png";
 
 var imgKit = new Image();
 imgKit.src = "game/res/gameObject.png";
+
+var imgFire = new Image();
+imgFire.src = "game/res/fire1.png";
+
+var imgFireArr = [new Image(), new Image(), new Image(), new Image()];
+imgFireArr[0].src = "game/res/fire1.png";
+imgFireArr[1].src = "game/res/fire2.png";
+imgFireArr[2].src = "game/res/fire3.png";
+imgFireArr[3].src = "game/res/fire4.png";
+
+var effectFire = null;
 
 /*Функции*/
 function init() // инициализация
@@ -193,6 +205,10 @@ function update()
 		stopSpawnEnemies();
 		enemies.push(new Enemy(3, 0.4)); 
 	}*/
+	if(effectFire != null)
+		if (!effectFire.visible) effectFire = null; else effectFire.update();
+
+	//effects.forEach((item)=>{item.update();});
 }
 
 function draw() // отрисовка
@@ -223,6 +239,8 @@ function draw() // отрисовка
     for(var i = 0; i < bullets.length; i++) bullets[i].draw();
     for(var i = 0; i < kits.length; i++) kits[i].draw();
     laserBullets.forEach((item) => { LaserBullet.draw(item, ctxGame); });
+	//effects.forEach((item)=>{item.draw();});
+	if(effectFire != null) effectFire.draw();
 
     ctxBg.font = "bold 20px Arial";
 	ctxBg.fillStyle = "#F00";

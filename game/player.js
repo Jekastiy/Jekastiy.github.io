@@ -122,6 +122,10 @@ Player.prototype.update = function()
 			   this.bullets[i].drawX > enemies[j].drawX - 5 &&  
 			   this.bullets[i].drawX < enemies[j].drawX + enemies[j].width - 5)
 			{
+				effectFire = new Effect(enemies[j].drawX, enemies[j].drawY, enemies[j].width, enemies[j].height); 
+				effectFire.loadImages();
+				//effectFire.imgs = [imgFire];
+				
 				this.bullets[i].visible = false;
 				this.bullets[i].destroy();
 				if(enemies[j].type != 3) enemies[j].destroy();
