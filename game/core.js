@@ -114,6 +114,7 @@ imgFireArr[1].src = "game/res/fire2.png";
 imgFireArr[2].src = "game/res/fire3.png";
 imgFireArr[3].src = "game/res/fire4.png";
 
+
 var effectFire = null;
 
 /*Функции*/
