@@ -1,5 +1,5 @@
 class Button {
-	constructor() {
+	constructor(_X, _Y, _W, _H) {
 		this.W = 80;
 		this.H = 55;
 		this.X = 0;
@@ -58,6 +58,18 @@ class Button {
 
 	getRight() {
 		return this.X + this.W;
+	}
+	
+	getLeft() {
+		return this.X;
+	}
+	
+	getTop() {
+		return this.Y;
+	}
+	
+	getBottom() {
+		return this.Y + this.H;
 	}
 }
 
