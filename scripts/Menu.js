@@ -77,7 +77,7 @@ var BUTTONS = [new Button(), new Button()];
 
 BUTTONS[0].setLocation({ X: 5, Y: 5});
 BUTTONS[0].setSize({ W: 80, H: 55});
-BUTTONS[0].click = function() { if(gold - 100 > 0) { gold -= 100; console.log(`Gold: ${gold}`);}}
+BUTTONS[0].click = function() { if(gold - 100 > 0) { if(confirm("Вы хотите купить?") == true) { gold -= 100; console.log(`Gold: ${gold}`);}}}
 BUTTONS[0].enter = function() { this.setSizeEnter(); }
 BUTTONS[0].leave = function() { this.setSizeNormal(); }
 
