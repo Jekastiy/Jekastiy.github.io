@@ -53,10 +53,10 @@ class Game {
 	}
 
 	pause() {
-		if(this.STATE == 1) this.STATE = 0;
+		this.STATE = (this.STATE == 1)? 0: 1;
 	}
 
 	resume() {
-		if(this.STATE == 0) this.STATE = 1;
+		this.STATE = (this.STATE == 0)? 1: 0;
 	}
 }
