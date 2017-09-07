@@ -7,16 +7,16 @@ var requestAnimFrame = window.requestAnimationFrame ||
 var BTN_FOCUS = null;
 
 function mouseClick(e) {
-	for(item of BUTTONS) {
+	/*for(item of BUTTONS) {
 		if(e.clientX > item.X && e.clientX < item.X + item.W && e.clientY > item.Y && e.clientY < item.Y + item.H) {
 			item.click();
 			break;
 		}
-	}
+	}*/
 }
 
 function mouseMove(e) {
-	for(item of BUTTONS) {
+	/*for(item of BUTTONS) {
 		if(e.clientX > item.X && e.clientX < item.X + item.W && e.clientY > item.Y && e.clientY < item.Y + item.H) {
 			if(item != BTN_FOCUS) { 
 				item.enter();
@@ -30,7 +30,7 @@ function mouseMove(e) {
 	if(BTN_FOCUS != null) { 
 		BTN_FOCUS.leave();
 		BTN_FOCUS = null;
-	}
+	}*/
 }
 
 document.addEventListener("mousemove", mouseMove, false);
@@ -44,5 +44,3 @@ window.onload = () => {
 }
 
 window.onblur = () => { game.pause(); }
-
-var gold = 1000;

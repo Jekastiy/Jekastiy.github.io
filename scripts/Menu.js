@@ -1,9 +1,9 @@
 class Button {
 	constructor(_X, _Y, _W, _H) {
-		this.W = 80;
-		this.H = 55;
-		this.X = 0;
-		this.Y = 0;
+		this.W = _W;
+		this.H = _H;
+		this.X = _X;
+		this.Y = _Y;
 
 		this.X2 = 0;
 		this.Y2 = 0;
@@ -11,9 +11,9 @@ class Button {
 		this.X1 = 0;
 		this.Y1 = 0;
 
-		this.SIZE_NORMAL = { W: 80, H: 55, X: 5, Y: 5 };
-		this.SIZE_ENTER = { W: 78, H: 53, X: 6, Y: 6 };
-		this.SIZE_PRESS = { W: 76, H: 51, X: 7, Y: 7 };
+		this.SIZE_NORMAL = { W: this.W, H: this.H, X: this.X, Y: this.Y };
+		this.SIZE_ENTER = { W: this.W - 2, H: this.H - 2, X: this.X + 2, Y: this.Y + 2 };
+		this.SIZE_PRESS = { W: this.W - 3, H: this.H - 3, X: this.X + 3, Y: this.Y + 3 };
 	}
 
 	setSizeNormal(s = this.SIZE_NORMAL) {
@@ -72,16 +72,3 @@ class Button {
 		return this.Y + this.H;
 	}
 }
-
-var BUTTONS = [new Button(), new Button()];
-
-BUTTONS[0].setLocation({ X: 5, Y: 5});
-BUTTONS[0].setSize({ W: 80, H: 55});
-BUTTONS[0].click = function() { if(gold - 100 > 0) { if(confirm("Вы хотите купить?") == true) { gold -= 100; console.log(`Gold: ${gold}`);}}}
-BUTTONS[0].enter = function() { this.setSizeEnter(); }
-BUTTONS[0].leave = function() { this.setSizeNormal(); }
-
-
-BUTTONS[1].setLocation({ X: BUTTONS[0].getRight() + 5, Y: 5});
-BUTTONS[1].setSize({ W: 80, H: 55});
-BUTTONS[1].click = function() { gold += 1; console.log(`Gold: ${gold}`);}
