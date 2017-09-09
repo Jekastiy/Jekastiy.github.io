@@ -111,9 +111,24 @@ class MonoLaser extends Gun {
 		super(0, 50, 1);
 	}
 
-	fire() {
+	fire(){
 		createBullet(player.drawX + (player.width * 0.5), player.drawY + 15, this.speed, 5);
-		//laserBullets.push(new LaserBullet({X: player.drawX + (player.width * 0.5) - 5, Y: player.drawY + 15}, 2, this.speed));
+	}
+}
+
+class RocketGun extends Gun {
+	constructor() {
+		super(0, 50, 1);
+	}
+
+	fire() {
+		let rocket = new Rocket(player.drawX + (player.width * 0.5), player.drawY + 15, player.speed); 
+		player.bullets.push(rocket);
+	}
+
+	init() {
+		let tmp = [80, 60, 50, 40, 30, 20];
+		this.KD = tmp[this.level];
 	}
 }
 

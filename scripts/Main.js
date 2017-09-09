@@ -40,6 +40,7 @@ window.onload = () => {
 	if(game == undefined) { 
 		game = new Game(window.innerWidth, window.innerHeight);
 		game.init();
+
 	}
 }
 

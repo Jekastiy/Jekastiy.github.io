@@ -22,7 +22,7 @@ class Game {
 		this.ctx.clearRect(0, 0, this.SIZE.W, this.SIZE.H);
 
 		if(this.MODE = 'MENU') {
-			for (var btn of BUTTONS) { btn.draw(); } 
+			//for (var btn of BUTTONS) { btn.draw(); } 
 			//this.ctx.drawRect(5,5,80,50);
 		}
 	}

@@ -108,6 +108,9 @@ imgKit.src = "game/res/gameObject.png";
 var imgFire = new Image();
 imgFire.src = "game/res/fire1.png";
 
+var imgRocket = new Image();
+imgRocket.src = "game/res/rocket.png";
+
 var imgFireArr = [new Image(), new Image(), new Image(), new Image()];
 imgFireArr[0].src = "game/res/fire1.png";
 imgFireArr[1].src = "game/res/fire2.png";
@@ -196,6 +199,15 @@ function update()
 		let tmp_speed = player.gun.speed;
 		let tmp_lvl = player.gun.level;
 		player.gun = new DoubleLaser();
+		player.gun.speed = tmp_speed;
+		player.gun.level = tmp_lvl;
+		player.gun.init();
+	}
+	if(scope == 200) {
+		scope++;
+		let tmp_speed = player.gun.speed;
+		let tmp_lvl = player.gun.level;
+		player.gun = new RocketGun();
 		player.gun.speed = tmp_speed;
 		player.gun.level = tmp_lvl;
 		player.gun.init();
