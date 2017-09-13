@@ -56,7 +56,7 @@ var effects = [];
 
 	function mouseClick(e)
 	{
-		console.log(e);
+		//console.log(e);
 		//player.drawX = e.pageX - 200;//- player.width/2;
 		//player.drawY = e.pageY - game.offsetTop;//- player.height/2;
 	}
@@ -110,6 +110,9 @@ imgFire.src = "game/res/fire1.png";
 
 var imgRocket = new Image();
 imgRocket.src = "game/res/rocket.png";
+
+var imgAsteroid = new Image();
+imgAsteroid.src = "game/res/asteroids.png";
 
 var imgFireArr = [new Image(), new Image(), new Image(), new Image()];
 imgFireArr[0].src = "game/res/fire1.png";
@@ -175,7 +178,6 @@ function stopLoop()
 
 function update() 
 { 
-	//console.log("loop");
 	bg_shift--;
 	if(bg_shift == 0) bg_shift = 600;
 	player.update();
@@ -213,15 +215,9 @@ function update()
 		player.gun.init();
 	}
 
-	/*if(scope > 100 && creatingDeathStar == true){
-		creatingDeathStar = false;
-		stopSpawnEnemies();
-		enemies.push(new Enemy(3, 0.4)); 
-	}*/
+
 	if(effectFire != null)
 		if (!effectFire.visible) effectFire = null; else effectFire.update();
-
-	//effects.forEach((item)=>{item.update();});
 }
 
 function draw() // отрисовка
@@ -250,17 +246,15 @@ function draw() // отрисовка
 	for(var i = 0; i < enemies.length; i++) enemies[i].draw();
 	for(var i = 0; i < player.bullets.length; i++) player.bullets[i].draw();
     for(var i = 0; i < bullets.length; i++) bullets[i].draw();
-    for(var i = 0; i < kits.length; i++) kits[i].draw();
+    //for(var i = 0; i < kits.length; i++) kits[i].draw();
     laserBullets.forEach((item) => { LaserBullet.draw(item, ctxGame); });
 	//effects.forEach((item)=>{item.draw();});
 	if(effectFire != null) effectFire.draw();
 
-    ctxBg.font = "bold 20px Arial";
+    ctxBg.font = "bold 20px Courier New";
 	ctxBg.fillStyle = "#F00";
 	ctxBg.fillText("Здоровье: " + player.health, 10, 30);
 	ctxBg.fillText("Счет: " + scope, 10, 50);
-	ctxBg.fillText("Враги: " + enemies.length, 10, 70);
-	if(enemies.length != 0) ctxBg.fillText("Скорость врагов: " + enemies[0].speed, 10, 90);
 }
 
 function clearCtx()
@@ -351,6 +345,9 @@ function spawnEnemy(count)
 			}
 			else {
 				enemies.push(new Enemy(2, enemySpeed));
+				if(scope > 150) {
+					enemies.push(new Asteroid(1, enemySpeed * 1.5));
+				}
 			}
 			count--;
 		}
@@ -359,10 +356,11 @@ function spawnEnemy(count)
 
 function spawnKits()
 {
-	player.health++;
-	draw_effect1 = true;
-	draw_effect1_time = 25;
-	//kits.push(new gameObject(getRandomInt(10, gameWidth - 10), 5));
+	if (isPlaying && player.health < 15) {
+		player.health++;
+		draw_effect1 = true;
+		draw_effect1_time = 25; 
+	}
 }
 
 function createBullet(X,Y, speed, damage)
@@ -374,8 +372,6 @@ function createBullet(X,Y, speed, damage)
 /*Интервал спауна врагов*/
 function startSpawnEnemies()
 {
-	//return;
-	// stopSpawnEnemies();
 	spawnInterval = setInterval(function() { spawnEnemy(spawnAmount) }, spawnTime);
 	kitSpawnInterval = setInterval(
 		function() { spawnKits() }, 

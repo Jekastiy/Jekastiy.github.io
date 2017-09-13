@@ -9,15 +9,18 @@ class Rocket extends Bullet {
 		this.speed = _Speed;	
 		this.target = null;
 
-		this.getTarget = function(){
+		this.getTarget = function() {
 			let max = 0;
-
-			enemies.forEach((item)=>{ 
-				if((item.drawX < player.drawX + player.width || item.drawX + item.width > player.drawX) && (item.drawY + item.height > max)) {
-					max = item.drawY + item.height;
-					this.target = item;
-				}
-			});
+			let callback = function(value) { 
+				if(value.type != "Asteroid" && (value.drawX + value.width > player.drawX) && (value.drawX < player.drawX + player.width)) return true;
+			}
+			let tmp_enemies = enemies.filter(callback);
+			if(tmp_enemies.length != 0 && tmp_enemies != null) {
+				max = tmp_enemies[0].drawY;	
+			}
+			tmp_enemies.sort((a,b)=>{ return (a.drawY > b.drawY)? true: false;});
+			
+			this.target = tmp_enemies[0];
 		}
 
 		this.getTarget();
@@ -40,7 +43,7 @@ class Rocket extends Bullet {
 		this.drawY -= this.speed;
 
 		if(this.target != null) { 
-			if(this.drawX > this.target.drawX + this.target.width * 0.5) this.drawX-=2; else this.drawX+=2;
+			if(this.drawX > this.target.drawX + this.target.width * 0.5) this.drawX -= 2; else this.drawX += 2;
 		} else {
 
 		}
@@ -52,16 +55,5 @@ class Rocket extends Bullet {
 	{
 		this.active = false;
 		player.bullets = player.bullets.filter((number) => {return (number.active)? true: false});
-	}
-
-	getTarget(){
-		let max = 0;
-
-		enemies.forEach((item)=>{ 
-			if((item.drawX < player.drawX + player.width || item.drawX + item.width > player.drawX) && (item.drawY + item.height > max)) {
-				max = item.drawY + item.height;
-				this.target = item;
-			}
-		});
 	}
 }

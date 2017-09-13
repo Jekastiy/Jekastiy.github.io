@@ -9,7 +9,7 @@ function Enemy(speed)
 	this.width = this.srcWidth / 2;
 	this.height = this.srcHeight / 2;
 
-	this.drawX = Math.random() * (gameWidth - this.srcWidth);
+	this.drawX = Math.random() * (gameWidth - this.width);
 	this.drawY = 0 - this.height;
 	
 	this.speed = speed;
@@ -42,7 +42,7 @@ function Enemy(i_type, i_speed) {
 	this.width = this.srcWidth * k;
 	this.height = this.srcHeight * k;
 
-	this.drawX = Math.random() * (gameWidth - this.srcWidth);
+	this.drawX = Math.random() * (gameWidth - this.width);
 	this.drawY = 0 - this.height;
 
 	if(i_type == 3) {
@@ -122,4 +122,39 @@ Enemy.prototype.fire = function()
 	bullet.vector = '+';
 	bullet.image.src = "game/res/bullet2.png";
 	bullets.push(bullet);
+}
+
+class Asteroid extends Enemy {
+	constructor(i_type, i_speed) {
+		super(i_type, i_speed);
+		this.rotation = 0;
+		this.imageX = 0;
+		this.imageY = 0;
+		this.rotationAcceleration = 0.05;
+		this.width = 40;
+		this.height = 55;
+		this.type = "Asteroid";
+	}
+
+	draw() {
+		ctxGame.drawImage(imgAsteroid, 
+			this.imageX, this.imageY, 90, 115,
+			this.drawX,this.drawY, this.width, this.height
+		);
+	}
+
+	update() {
+		this.drawY += this.speed;
+		this.rotation += this.rotationAcceleration; 
+		if(this.rotation >= 30) this.rotation = 0;
+		if(Math.round(this.rotation) <= 15) {
+			this.imageX = Math.round(this.rotation) * 90;
+			this.imageY = 0;
+		} else
+		if(Math.round(this.rotation) >= 16) {
+			this.imageX = (Math.round(this.rotation) - 15) * 90;
+			this.imageY = 115;
+		}
+		if(this.drawY > gameHeight) this.destroy();
+	}
 }

@@ -108,7 +108,6 @@ class LaserBullet {
 						0, 0, 60, 120,
 						bullet.LOCATION.X, bullet.LOCATION.Y, bullet.SIZE.W, bullet.SIZE.H
 					);
-					//ctx.drawImage(new Image(), 0, 0, 20, 20, 0, 0, 20, 20);
 				}	
 			}
 

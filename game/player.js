@@ -41,7 +41,6 @@ function Player()
 	this.acceleration = 0; // боковое ускорение
 }
 
-
 Player.prototype.draw = function()
 {
 	if(this.acceleration <= -0.5) this.img = this.imgs[0]; else
@@ -52,10 +51,6 @@ Player.prototype.draw = function()
 		this.srcX, this.srcY, this.srcWidth, this.srcHeight,
 		this.drawX,this.drawY, this.width, this.height
 	);
-
-	//ctxGame.fillStyle = "green";
-	//ctxGame.fillRect(this.drawX, this.drawY, this.width, this.height);
-	//drawCenter(this.axisX, this.axisY, this.width, this.height);
 }
 
 Player.prototype.isOverlapsed = function(loc_size) {
@@ -103,17 +98,6 @@ Player.prototype.update = function()
 			}
 	}
 
-		//var R_X = this.drawX - 5 > enemies[i].drawX + enemies[i].width + 5;
-		//var L_X = this.drawX + this.width - 5 < enemies[i].drawX + 5;
-		//var B_Y = this.drawY + 5 > enemies[i].drawY + enemies[i].height - 5;
-		//var T_Y = this.drawY + this.height -5 < enemies[i].drawY + 5;
-
-		//if(R_X && L_X && B_Y && T_Y) {
-		//	console.log(this);
-		//	console.log(enemies[i]);
-		//	Pause();
-		//}
-
 	for(var i = 0; i < this.bullets.length; i++)
 	{
 		for (var j = 0; j < enemies.length; j++) 
@@ -124,7 +108,6 @@ Player.prototype.update = function()
 			{
 				effectFire = new Effect(enemies[j].drawX, enemies[j].drawY, enemies[j].width, enemies[j].height); 
 				effectFire.loadImages();
-				//effectFire.imgs = [imgFire];
 				
 				this.bullets[i].visible = false;
 				this.bullets[i].destroy();
