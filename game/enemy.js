@@ -20,6 +20,9 @@ function Enemy(speed)
 	// 1 - low
 	// 2 - medium
 	// 3 - high
+
+	this.maxHealth = 5;
+	this.healthProc = 100;
 }
 
 function Enemy(i_type, i_speed) {
@@ -61,7 +64,17 @@ function Enemy(i_type, i_speed) {
 	3 - high 
 	*/
 
-	//if(i_type == 3) this.speed = 0.5;	
+	this.maxHealth = 2; 	// максимальное здоровье
+	this.currHealth = 2;	// текущее здоровье
+	//this.healthProc = 100;	// в процентах
+
+	if(i_type == 1) {
+		this.maxHealth = 2; 	// максимальное здоровье
+		this.currHealth = 2;	// текущее здоровье
+	} else {
+		this.maxHealth = 3; 	// максимальное здоровье
+		this.currHealth = 3;	// текущее здоровье
+	}
 }
 
 Enemy.prototype.draw = function()
@@ -70,6 +83,12 @@ Enemy.prototype.draw = function()
 		ctxGame.drawImage(imgEnemy, 
 			this.srcX, this.srcY, this.srcWidth, this.srcHeight,
 			this.drawX,this.drawY, this.width, this.height);
+
+			ctxGame.fillStyle = "red";
+			ctxGame.fillRect(this.drawX, this.drawY, this.width, 5);
+			ctxGame.fillStyle = "green";
+			ctxGame.fillRect(this.drawX, this.drawY, (this.currHealth / this.maxHealth) * 100 * (this.width / 100), 5);
+
 	} else 
 		if(this.type == 2) {
 			ctxGame.drawImage(imgEnemy2, 
