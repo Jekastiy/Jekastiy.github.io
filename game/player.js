@@ -111,8 +111,14 @@ Player.prototype.update = function()
 				
 				this.bullets[i].visible = false;
 				this.bullets[i].destroy();
-				if(enemies[j].type != 3) enemies[j].destroy();
-				scope++;
+				if(enemies[j].type != 3) {
+					enemies[j].currHealth -= 1;
+					if(enemies[j].currHealth <= 0){	
+						enemies[j].destroy();
+						scope++;
+					} 
+				}
+
 				break;
 			}
 		}
