@@ -7,6 +7,8 @@ function Player()
 	this.imgs[1].src = "game/res/player_0.png";
 	this.imgs[2].src = "game/res/player_+3.png";
 
+	this.fireEffect = null
+
 	// Source image
 	this.srcX = 0;
 	this.srcY = 0;
@@ -51,6 +53,11 @@ Player.prototype.draw = function()
 		this.srcX, this.srcY, this.srcWidth, this.srcHeight,
 		this.drawX,this.drawY, this.width, this.height
 	);
+	
+	if (this.fireEffect) {
+		this.fireEffect.x = this.axisX - 7
+		this.fireEffect.draw()
+	}
 }
 
 Player.prototype.isOverlapsed = function(loc_size) {
@@ -153,7 +160,10 @@ Player.prototype.chooseDir = function()
 	if (this.isDown &&(this.drawY < gameHeight-this.height))	
 		this.drawY += this.speed;
 
-	if (this.isFire && this.gun.isReady()) this.gun.fire(); // огонь по противнику
+	if (this.isFire && this.gun.isReady())  {
+		this.gun.fire(); 
+		this.fireEffect = new fireEffect(ctxGame, this.axisX - 7, this.drawY - 14);
+	}
 
 	this.axisX = this.drawX + (this.width * 0.5);
 }
