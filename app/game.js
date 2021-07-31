@@ -1,4 +1,4 @@
-import { Frame } from "./frame"
+import { Frame } from "./frame.js"
 
 export class Game
 {

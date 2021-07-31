@@ -1,8 +1,7 @@
-import { App } from "../app/app"
+import { App } from "../app/app.js"
 
 let app = new App()
-
-let Navigate = url => document.location.href = url
+app.name = "Star Wars: Space Warrior"
 
 console.log("index.js done")
-console.log($`App: { app.name }`)
+console.log("App: " + app.name)

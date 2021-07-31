@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.circlechart.js"></script>
-	<script type="module" src="scripts/index.js"></script>
+	<script type="module" src="./scripts/index.js"></script>
 	<link href="css/deaduser.css" rel="stylesheet">
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -57,8 +57,13 @@
 				menu_style.height = "600px";
 			</script>
 			
-			<div class = "menu_button" style="top: 380px; font-family: monospace;" onclick="Navigate('game.html');"> Start game</div>
-			<div class = "menu_button" style="top: 400px; font-family: monospace;" onclick="Navigate('upgrade.html');"> Upgrade </div>
+			<a href="game.html">
+				<div class="menu_button" style="top: 380px;"> Start game </div>
+			</a>
+
+			<a href="upgrade.html">
+				<div class="menu_button" style="top: 400px;"> Upgrade </div>
+			</a>
 		</div>
 	</div>
 
