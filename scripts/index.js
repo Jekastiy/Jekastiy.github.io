@@ -1,7 +1,19 @@
-import { App } from "../app/app.js"
-
-let app = new App()
-app.name = "Star Wars: Space Warrior"
-
-console.log("index.js done")
-console.log("App: " + app.name)
+let app = new Vue({
+    el: '#app',
+    data: {
+        authors: [
+            { email: 'egeneavdeev2013@gmail.com' },
+            { email: 'egor.domozhirov@gmail.com' }
+        ],
+        startButtonCaption: 'Start game',
+        upgradeButtonCaption: 'Upgrade'
+    },
+    methods: {
+        goGameView: () => {
+            document.location = 'game.html'
+        },
+        goUpgradeView: () => {
+            document.location = 'upgrade.html'
+        }
+    }
+})
