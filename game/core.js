@@ -247,12 +247,16 @@ function draw() // отрисовка
     //for(var i = 0; i < kits.length; i++) kits[i].draw();
     laserBullets.forEach((item) => { LaserBullet.draw(item, ctxGame); });
 	//effects.forEach((item)=>{item.draw();});
-	if(effectFire != null) effectFire.draw();
+	if (effectFire != null) effectFire.draw();
 
-    ctxBg.font = "bold 20px Courier New";
+	showParameters(player.health, scope)
+}
+
+let showParameters = (health, score) => {
+	ctxBg.font = "bold 20px Courier New";
 	ctxBg.fillStyle = "#F00";
-	ctxBg.fillText("Здоровье: " + player.health, 10, 30);
-	ctxBg.fillText("Счет: " + scope, 10, 50);
+	ctxBg.fillText("Здоровье: " + health, 10, 30);
+	ctxBg.fillText("Счет: " + score, 10, 50);
 }
 
 function clearCtx()
@@ -331,22 +335,24 @@ function checkKeyUp(e)
 	}
 }
 
-/*Функция спауна врагов*/
-function spawnEnemy(count)
-{
-	if(isPlaying)
-	{
-		while(count != 0)
-		{
-			if(scope < 50) {
-				enemies.push(new Enemy(1, enemySpeed)); 
+let spawnEnemy = (count) => {
+	if (isPlaying) {
+		while (count > 0) {
+			let easy = new Enemy(1, enemySpeed)
+			let normal = new Enemy(2, enemySpeed)
+			let hard = new Asteroid(1, enemySpeed * 1.5)
+
+			if (scope < 50) {
+				enemies.push(easy)
 			}
 			else {
-				enemies.push(new Enemy(2, enemySpeed));
-				if(scope > 150) {
-					enemies.push(new Asteroid(1, enemySpeed * 1.5));
+				enemies.push(normal)
+
+				if (scope > 150) {
+					enemies.push(hard)
 				}
 			}
+
 			count--;
 		}
 	}
