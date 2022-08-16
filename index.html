@@ -14,7 +14,7 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="./css/style.css">
 	</head>
-	<body>
+	<body style="background-color: rgb(238, 238, 238);">
 		<div id="app">
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
@@ -46,7 +46,7 @@
 					<div v-on:click="goUpgradeView" class="btn-light menu_button" style="top: 400px;">{{ upgradeButtonCaption }}</div>
 				</div>
 			</div>
-			<footer class="footer">
+			<footer class="footer navbar-inverse">
 				<div class="container">
 					<ul>
 						<li style="list-style-type:none" class="text-muted" v-for="author in authors">
