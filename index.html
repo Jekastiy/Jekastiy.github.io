@@ -1,70 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<title>Star Wars: Space Warrior</title>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.circlechart.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-	<!--script src="https://cdn.jsdelivr.net/npm/vue@2"></script-->
-	<link href="css/deaduser.css" rel="stylesheet">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./css/style.css">
-</head>
-<body>
-	<div id="app">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Navbar</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">Projects</a>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Star Wars: Space Warrior</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.circlechart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<!--script src="https://cdn.jsdelivr.net/npm/vue@2"></script-->
+		<link href="css/deaduser.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		<div id="app">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Navbar</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="index.html">Projects</a>
+					</div>
+					<ul id="navbar" class="nav navbar-nav navbar-collapse collapse">
+						<li><a href="index.html">Star Wars</a></li>           
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="https://github.com/Jekastiy/Jekastiy.github.io">Star Wars</a></li> 
+							</ul>
+						</li>
+					</ul>
 				</div>
-				<ul id="navbar" class="nav navbar-nav navbar-collapse collapse">
-					<li><a href="https://deaduser.github.io/gomoku.html">Gomoku</a></li>
-					<li><a href="index.html">StarWars</a></li>           
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Download<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="https://drive.google.com/file/d/0B5t-e_LTi55jYmlvOU9VcW40czA/view?usp=sharing">Gomoku</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Source code<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="https://github.com/DeadUSer/Gomoku">Gomoku</a></li>
-							<li><a href="https://github.com/Jekastiy/Jekastiy.github.io">StarWars</a></li> 
-						</ul>
-					</li>
-				</ul>
+			</nav>
+			<div class="container theme-showcase" role="main" style="background-color: #eee;">
+				<div align="center" id="d_menu" style="margin: auto; margin-top: 100px; background-image: url('menu_logo.png'); width: 800px; height: 600px; position: relative;">
+					<div v-on:click="goGameView" class="btn-light menu_button" style="top: 380px;">{{ startButtonCaption }}</div>
+					<div v-on:click="goUpgradeView" class="btn-light menu_button" style="top: 400px;">{{ upgradeButtonCaption }}</div>
+				</div>
 			</div>
-		</nav>
-		<div class="container theme-showcase" role="main" style="background-color: #eee;">
-			<div align="center" id="d_menu" style="margin: auto; margin-top: 100px; background-image: url('menu_logo.png'); width: 800px; height: 600px; position: relative;">
-				<div v-on:click="goGameView" class="menu_button" style="top: 380px;">{{ startButtonCaption }}</div>
-				<div v-on:click="goUpgradeView" class="menu_button" style="top: 400px;">{{ upgradeButtonCaption }}</div>
-			</div>
+			<footer class="footer">
+				<div class="container">
+					<ul>
+						<li style="list-style-type:none" class="text-muted" v-for="author in authors">
+							{{ author.email }}
+						</li>
+					</ul>
+				</div>
+			</footer>	
 		</div>
-		<footer class="footer">
-			<div class="container">
-				<ul>
-					<li style="list-style-type:none" class="text-muted" v-for="author in authors">
-						{{ author.email }}
-					</li>
-				</ul>
-			</div>
-		</footer>	
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="./scripts/index.js"></script>
-</div>
-</body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="./scripts/index.js"></script>
+	</body>
 </html>
