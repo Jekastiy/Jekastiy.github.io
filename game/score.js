@@ -7,6 +7,10 @@ class Score {
         return this.value
     }
 
+    getAsString() {
+        return 'Счет: ' + this.value
+    }
+
     add(count = 1) {
         this.value += count
     }

@@ -30,9 +30,8 @@ var bullets = []; // bullets of enemis
 var kits = [];
 
 var enemySpeed = 3;
-var spawnInterval;
-var spawnTime = 500;
-var spawnAmount = 1;
+var enemySpawnInterval;
+var enemySpawnTimeout = 500;
 
 var kitSpawnInterval;
 
@@ -254,14 +253,14 @@ function draw() // отрисовка
 	//effects.forEach((item)=>{item.draw();});
 	if (effectFire != null) effectFire.draw();
 
-	showParameters(player.health, score.getValue())
+	showParameters(player.health)
 }
 
-let showParameters = (health, score) => {
+let showParameters = (health) => {
 	ctxBg.font = "bold 20px Courier New";
 	ctxBg.fillStyle = "#F00";
 	ctxBg.fillText("Здоровье: " + health, 10, 30);
-	ctxBg.fillText("Счет: " + score, 10, 50);
+	ctxBg.fillText(score.getAsString(), 10, 50);
 }
 
 function clearCtx()
@@ -270,7 +269,6 @@ function clearCtx()
 	ctxBg.clearRect(0, 0, gameWidth, gameHeight);
 }
 
-/*реагирование на мышь*/
 function checkKeyDown(e)
 {
 	var keyID = e.keyCode || e.which;
@@ -340,7 +338,7 @@ function checkKeyUp(e)
 	}
 }
 
-let spawnEnemy = (count) => {
+let spawnEnemy = (count = 1) => {
 	if (isPlaying) {
 		while (count > 0) {
 			let easy = new Enemy(1, enemySpeed)
@@ -378,18 +376,15 @@ function createBullet(X,Y, speed, damage)
 	player.bullets.push(bullet);
 }
 
-/*Интервал спауна врагов*/
-function startSpawnEnemies()
-{
-	spawnInterval = setInterval(function() { spawnEnemy(spawnAmount) }, spawnTime);
-	kitSpawnInterval = setInterval(
-		function() { spawnKits() }, 
-		15000);
+let startSpawnEnemies = () => {
+	const kitSpawnTimeout = 15000
+
+	enemySpawnInterval = setInterval(() => spawnEnemy(), enemySpawnTimeout)
+	kitSpawnInterval = setInterval(() => spawnKits(), kitSpawnTimeout)
 }
 
-function stopSpawnEnemies()
-{
-	clearInterval(spawnInterval);
+let stopSpawnEnemies = () => {
+	clearInterval(enemySpawnInterval)
 }
 
 function getRandomInt(min, max)
