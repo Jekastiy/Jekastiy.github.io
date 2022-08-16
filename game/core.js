@@ -19,6 +19,7 @@ var background; // прототип фона
 
 var isPlaying; // идет ли игра
 
+var score;
 var scope; // количество сбитых самолетов империи
 var tmp_scope;
 var bg_shift;
@@ -123,9 +124,11 @@ var effectFire = null;
 
 /*Функции*/
 function init() // инициализация
-{ 
-	player = new Player();
-	background = new Background();
+{
+	score = new Score()
+	player = new Player()
+	background = new Background()
+	
 	scope = 0;
 	tmp_scope = 0;
 	bg_shift = 600;
@@ -196,6 +199,7 @@ function update()
 
 	if(scope == 100) {
 		scope++;
+		score.add()
 		let tmp_speed = player.gun.speed;
 		let tmp_lvl = player.gun.level;
 		player.gun = new DoubleLaser();
@@ -205,6 +209,7 @@ function update()
 	}
 	if(scope == 200) {
 		scope++;
+		score.add()
 		let tmp_speed = player.gun.speed;
 		let tmp_lvl = player.gun.level;
 		player.gun = new RocketGun();
@@ -249,7 +254,7 @@ function draw() // отрисовка
 	//effects.forEach((item)=>{item.draw();});
 	if (effectFire != null) effectFire.draw();
 
-	showParameters(player.health, scope)
+	showParameters(player.health, score.getValue())
 }
 
 let showParameters = (health, score) => {

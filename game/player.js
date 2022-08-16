@@ -115,7 +115,8 @@ Player.prototype.update = function()
 					enemies[j].currHealth -= 1;
 					if(enemies[j].currHealth <= 0){	
 						enemies[j].destroy();
-						scope++;
+						scope++; // obsolete
+						score.add()
 					} 
 				}
 
