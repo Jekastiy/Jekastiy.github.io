@@ -1,12 +1,10 @@
-/*События*/
 window.onload = init;
 window.onblur = function() {
 	Pause();
 }
 
-
 /*Глобальные переменные*/
-var gameWidth = 800; // размеры поля
+var gameWidth = 800;
 var gameHeight = 600;
 
 var bg;  // канвас фона
@@ -127,7 +125,7 @@ var effectFire = null;
 function init() // инициализация
 { 
 	player = new Player();
-	background = new Bg();
+	background = new Background();
 	scope = 0;
 	tmp_scope = 0;
 	bg_shift = 600;
