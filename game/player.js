@@ -10,12 +10,13 @@ function Player()
 	// Source image
 	this.srcX = 0;
 	this.srcY = 0;
-	this.srcWidth = 198;
-	this.srcHeight = 186;
+	this.srcWidth = 200;
+	this.srcHeight = 200;
 
 	// Game object
-	this.width = this.srcWidth * 0.5;
-	this.height = this.srcHeight * 0.5;
+	let ksize = 0.4
+	this.width = this.srcWidth * ksize;
+	this.height = this.srcHeight * ksize;
 	this.drawX = (gameWidth * 0.5) - (this.width * 0.5);
 	this.drawY = gameHeight - this.height;	
 	

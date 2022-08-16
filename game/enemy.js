@@ -6,8 +6,9 @@ function Enemy(speed)
 	this.srcWidth = 180;
 	this.srcHeight = 180;
 
-	this.width = this.srcWidth / 2;
-	this.height = this.srcHeight / 2;
+	let ksize = 0.4
+	this.width = this.srcWidth * ksize
+	this.height = this.srcHeight * ksize
 
 	this.drawX = Math.random() * (gameWidth - this.width);
 	this.drawY = 0 - this.height;
@@ -38,7 +39,7 @@ function Enemy(i_type, i_speed) {
 	}
 	
 	var k = 1; // коэффициент размера
-	if(i_type == 1) k = 0.5;
+	if(i_type == 1) k = 0.4;
 	if(i_type == 2)	k = 0.4;
 	if(i_type == 3) k = 1.5;
 
@@ -109,7 +110,6 @@ Enemy.prototype.update = function()
 		this.drawX += (this.drawX + (this.width * 0.5) < player.axisX)? 0.3: -0.3; // смещение к игроку
 		return;
 	}
-
 
 	this.drawY += this.speed; //пролететь вперед
 	if(scope > 100) this.drawX += (this.drawX + (this.width * 0.5) < player.axisX)? 0.15: -0.15; // смещение к игроку
